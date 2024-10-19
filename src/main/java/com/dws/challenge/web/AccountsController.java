@@ -47,6 +47,7 @@ public class AccountsController {
 
   @PostMapping("/transfer")
   public ResponseEntity<String> transferMoney(@Valid @RequestBody TransferRequest transferRequest) {
+    log.info("Transferring amount {} from {} to {}", transferRequest.getAmount(), transferRequest.getAccountFromId(), transferRequest.getAccountToId());
     accountsService.transferMoney(
             transferRequest.getAccountFromId(),
             transferRequest.getAccountToId(),
