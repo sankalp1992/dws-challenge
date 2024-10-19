@@ -2,6 +2,7 @@ package com.dws.challenge;
 
 import com.dws.challenge.domain.Account;
 import com.dws.challenge.exception.DuplicateAccountIdException;
+import com.dws.challenge.exception.InsufficientBalanceException;
 import com.dws.challenge.service.AccountsService;
 import com.dws.challenge.service.NotificationService;
 import org.junit.jupiter.api.BeforeEach;
@@ -64,7 +65,7 @@ class AccountsServiceTest {
 
   @Test
   void transferMoney_successfulTransfer() {
-    // Arrange
+    // Create accounts
     Account accountFrom = new Account("Id-1");
     accountFrom.setBalance(new BigDecimal("1000"));
 
@@ -76,7 +77,7 @@ class AccountsServiceTest {
 
     BigDecimal transferAmount = new BigDecimal("200");
 
-    // Act
+    // call to transferMoney
     this.accountsService.transferMoney("Id-1", "Id-2", transferAmount);
 
     // Assert
@@ -90,7 +91,7 @@ class AccountsServiceTest {
 
   @Test
   void transferMoney_failsWhenInsufficientBalance() {
-    // Arrange
+    // Create accounts
     Account accountFrom = new Account("Id-1");
     accountFrom.setBalance(new BigDecimal("100"));
 
@@ -106,7 +107,7 @@ class AccountsServiceTest {
     try {
       this.accountsService.transferMoney("Id-1", "Id-2", transferAmount);
       fail("Should have failed due to insufficient balance");
-    } catch (IllegalArgumentException ex) {
+    } catch (InsufficientBalanceException ex) {
       assertThat(ex.getMessage()).isEqualTo("Insufficient balance in account: Id-1");
     }
 
