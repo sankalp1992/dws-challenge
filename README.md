@@ -16,7 +16,7 @@ This is a Spring Boot-based REST service that provides basic functionality for m
 
 - **Java 11** or higher
 - **Gradle** or **Maven** (whichever you are using)
-- **Spring Boot 2.6.6**
+- **Spring Boot 3.2.10**
 - **Postman** or **cURL** for API testing (optional)
 
 ## Project Setup
